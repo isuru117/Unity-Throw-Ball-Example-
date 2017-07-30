@@ -21,7 +21,7 @@ public class throwManager : MonoBehaviour {
 		}
 
 		if (isThrown) {
-			return; //prevent user from accesing ball after baing thrown
+			return; //prevent user from accesing ball after being thrown
 		}
 
 
