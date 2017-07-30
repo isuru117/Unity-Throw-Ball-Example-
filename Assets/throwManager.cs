@@ -8,8 +8,22 @@ public class throwManager : MonoBehaviour {
 	private Vector3 startPos; //mouse slide movement start pos
 	private Vector3 endPos; //mouse slide movement end pos
 	public float zDistance=30.0f;//z distance
+	private bool isThrown;
+
+	void Start(){
+		isThrown=false;
+	}
 
 	void Update () {
+
+		if (Input.GetKeyDown(KeyCode.R)) {
+			SceneManager.LoadScene (0); // Reset scene on pressing R
+		}
+
+		if (isThrown) {
+			return; //prevent user from accesing ball after baing thrown
+		}
+
 
 		if (Input.GetMouseButtonDown (0)) {
 			//get start mouse position
@@ -33,15 +47,12 @@ public class throwManager : MonoBehaviour {
 
 			//Print start Pos for debugging
 			Debug.Log (endPos);
-	
+
 			Vector3 throwDir = (startPos - endPos).normalized;//get throw direction based on start and end pos
 
 			this.gameObject.GetComponent<Rigidbody> ().AddForce (throwDir*(startPos - endPos).sqrMagnitude);//add force to throw direction*magnitude
 
-		}
-
-		if (Input.GetKeyDown(KeyCode.R)) {
-			SceneManager.LoadScene (0); // Reset scene on pressing R
+			isThrown = true;
 		}
 
 	}
